@@ -41,7 +41,7 @@ pipeline {
                       success {
                           echo 'After test java successfully.'
                       }
-                      failure {
+                      failure { // If got error from stage this condition is working
                           echo 'After test java failed.'
                       }
                 }
@@ -95,13 +95,13 @@ pipeline {
                     cleanup: This is a special condition within the global post section, primarily used for tasks like workspace cleanup, regardless of the build result.
                  */
                  always {
-                     echo 'Pipeline finished.'
+                     echo 'Pipeline deploy spring boot + docker finished.'
                  }
-                 success {
-                     echo 'Pipeline completed successfully.'
+                 success { // If some it is failure success won't work
+                     echo 'Pipeline deploy spring boot + docker completed successfully.'
                  }
-                 failure {
-                     echo 'Pipeline failed.'
+                 failure { // After failure on stages alert this still alert too (last process)
+                     echo 'Pipeline deploy spring boot + docker failed.'
                  }
         }
     }
