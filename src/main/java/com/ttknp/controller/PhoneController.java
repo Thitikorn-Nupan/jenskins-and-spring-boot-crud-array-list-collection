@@ -23,6 +23,13 @@ public class PhoneController {
         this.phoneService = new PhoneService();
     }
 
+    @GetMapping(value = "/server")
+    private ResponseEntity<String> server() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Server is up and running");
+    }
+
     @GetMapping(value = "/reads")
     private ResponseEntity<List<Phone>> reads() {
         return ResponseEntity
