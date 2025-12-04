@@ -69,6 +69,8 @@ pipeline {
                         echo 'After build jar'
                         sh "ls -l"
                     }
+                    // Returns to the original working directory
+                    sh 'pwd'
                 }
             }
 
@@ -116,6 +118,7 @@ pipeline {
                  }
                  success { // If some it is failure success won't work
                      echo 'Pipeline deploy spring boot + docker completed successfully.'
+                     sh 'pwd'
                  }
                  failure { // After failure on stages alert this still alert too (last process)
                      echo 'Pipeline deploy spring boot + docker failed.'
