@@ -50,8 +50,25 @@ pipeline {
 
             stage('Build maven') {
                 steps {
+                    // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
+                    sh 'pwd'
+
+                    // Go to target dir
+                    dir('target') {
+                        echo 'Before build jar'
+                        sh "ls -l"
+                    }
+
                     // Builds the Spring Boot application using maven
                     sh "mvn clean install -DskipTests"
+
+                    // Returns to the original working directory
+                    sh 'pwd'
+                    // Go to target dir
+                    dir('target') {
+                        echo 'After build jar'
+                        sh "ls -l"
+                    }
                 }
             }
 
