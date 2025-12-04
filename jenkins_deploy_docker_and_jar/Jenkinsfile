@@ -7,6 +7,7 @@ pipeline {
             // you have to call tru env.<var name> ex, env.DOMAIN
             JAR_TARGET = 'target/basic-api-using-spring-boot-3-0.0.1-SNAPSHOT.jar'
             CONTAINER_NAME = 'basic-api'
+            CONTAINER_RUNNER_NAME = 'backend'
             CONTAINER_VERSION = 'latest'
             CONTAINER_PORT_OUT = '8080'
             CONTAINER_PORT_IN = '8080'
@@ -55,7 +56,7 @@ pipeline {
 
             stage('Deploy') {
                 steps {
-                    sh "docker run --name backend -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
+                    sh "docker run --name ${env.CONTAINER_RUNNER_NAME} -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
                 }
             }
 

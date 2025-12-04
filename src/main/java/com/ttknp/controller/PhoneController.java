@@ -37,6 +37,13 @@ public class PhoneController {
                 .body(phoneService.getPhones());
     }
 
+    @GetMapping(value = "/readsBy")
+    private ResponseEntity<List<Phone>> readsByBrand(@RequestParam String brand) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(phoneService.getPhones(brand));
+    }
+
     @GetMapping(value = "/read")
     private ResponseEntity<Phone> read(@RequestParam String id) {
         return ResponseEntity

@@ -32,4 +32,10 @@ class BasicApiUsingSpringBootServiceTests {
        assertThat(phoneService.getPhone(id).getId()).isEqualTo(UUID.fromString(id));
     }
 
+    @Test
+    public void testGetAllByBrand() {
+        String brand = "brand";
+        assertThat(phoneService.getPhones(brand)).isNotNull();
+    }
+
 }

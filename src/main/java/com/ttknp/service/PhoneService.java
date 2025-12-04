@@ -3,6 +3,7 @@ package com.ttknp.service;
 import com.ttknp.entity.Phone;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PhoneService {
 
@@ -22,5 +23,9 @@ public class PhoneService {
 
     public Phone getPhone(String id) {
         return phones.stream().filter(p -> p.getId().equals(UUID.fromString(id))).findFirst().orElse(null);
+    }
+
+    public List<Phone> getPhones(String brand) {
+        return phones.stream().filter(p -> p.getBrand().equals(brand)).collect(Collectors.toList());
     }
 }

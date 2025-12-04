@@ -31,5 +31,12 @@ class BasicApiUsingSpringBootApplicationTests {
                 .andDo(print());
     }
 
+    @Test
+    public void testSelectAllByBrand() throws Exception {
+        mockMvc.perform(get("/api/phone/reads").param("brand","brand"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
 
 }
