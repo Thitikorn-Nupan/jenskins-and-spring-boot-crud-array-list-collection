@@ -50,7 +50,6 @@ pipeline {
             stage('Build docker') {
                 steps {
                     sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
-
                 }
             }
 

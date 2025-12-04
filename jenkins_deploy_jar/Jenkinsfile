@@ -4,7 +4,6 @@ pipeline {
     // any คือ ใช้ executor ใด ๆ ก็ได้
     agent any
 
-
     // stages as working Flows tell Pipeline what gonna do
     stages {
             stage('Before initial check software installed') {
