@@ -3,6 +3,14 @@ pipeline {
 
     // any คือ ใช้ executor ใด ๆ ก็ได้
     agent any
+    environment {
+            // you have to call tru env.<var name> ex, env.DOMAIN
+            JAR_TARGET = 'target/basic-api-using-spring-boot-3-0.0.1-SNAPSHOT.jar'
+            CONTAINER_NAME = 'basic-api'
+            CONTAINER_VERSION = 'latest'
+            CONTAINER_PORT_OUT = '8080'
+            CONTAINER_PORT_IN = '8080'
+    }
 
     // stages as working Flows tell Pipeline what gonna do
     stages {
@@ -40,14 +48,14 @@ pipeline {
 
             stage('Build docker') {
                 steps {
-                    sh "docker build -t basic-api:latest --build-arg JAR_FILE=target/basic-api-using-spring-boot-3-0.0.1-SNAPSHOT.jar ."
+                    sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
 
                 }
             }
 
             stage('Deploy') {
                 steps {
-                    sh "docker run --name backend -p 8080:8080 -d basic-api:latest"
+                    sh "docker run --name backend -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
                 }
             }
 
