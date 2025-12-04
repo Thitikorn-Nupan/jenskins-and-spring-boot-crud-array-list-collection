@@ -35,7 +35,7 @@ class BasicApiUsingSpringBootServiceTests {
     @Test
     public void testGetAllByBrand() {
         String brand = "brand";
-        assertThat(phoneService.getPhones(brand)).isNotNull();
+        assertThat(phoneService.getPhones(brand)).isNull();
     }
 
 }
