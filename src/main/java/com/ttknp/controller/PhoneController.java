@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/phone")
@@ -26,5 +28,12 @@ public class PhoneController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(phoneService.getPhones());
+    }
+
+    @GetMapping(value = "/read")
+    private ResponseEntity<Phone> read(@RequestParam String id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(phoneService.getPhone(id));
     }
 }

@@ -24,5 +24,12 @@ class BasicApiUsingSpringBootApplicationTests {
                 .andDo(print());
     }
 
+    @Test
+    public void testSelectOne() throws Exception {
+        mockMvc.perform(get("/api/phone/read").param("id","dc2000a7-6bbf-479a-8e7f-cb7d052c668b"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
 
 }
