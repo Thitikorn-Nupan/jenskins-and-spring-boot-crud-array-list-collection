@@ -69,6 +69,8 @@ pipeline {
                         echo 'After build jar'
                         sh "ls -l"
                     }
+                    // Returns to the original working directory
+                    sh 'pwd'
                 }
             }
 
