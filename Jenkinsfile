@@ -37,7 +37,7 @@ pipeline {
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                     sh 'mvn install:install-file' // Builds the project, including resolving dependencies
+                     sh 'mvn install' // Builds the project, including resolving dependencies
                      sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
                     // sh "mvn clean install -U"
                 }
