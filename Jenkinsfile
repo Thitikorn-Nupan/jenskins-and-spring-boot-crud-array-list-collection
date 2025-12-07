@@ -33,17 +33,13 @@ pipeline {
                 }
             }
 
-            triggers {
-                    // This line configures the trigger in the Jenkinsfile
-                    // Alternatively, configure it via the Jenkins UI in "Build Triggers"
-                    snapshotDependencies()
-            }
+
 
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                     sh 'mvn install' // Builds the project, including resolving dependencies
-                     sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
+                      sh "mvn clean deploy" // Builds the project, including resolving dependencies
+                     //  sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
                     // sh "mvn clean install -U"
                 }
                 post {
