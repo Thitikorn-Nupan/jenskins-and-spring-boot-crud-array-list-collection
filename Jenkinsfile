@@ -31,16 +31,16 @@ pipeline {
                 }
             }
 
-            stage('Build and Deploy Upstream SNAPSHOT') {
+            stage('Build with Snapshots') {
                 steps {
-                    script {
-                        withMaven(maven: 'maven-3.8.6') { // Specify your Maven tool
-                            sh 'mvn clean install'
-                        }
-                    }
+                    sh 'mvn -B -U clean install'
+                    /*
+                    - '-B' for non-interactive (batch) mode
+                    - '-U' **Forces a check for updated releases and snapshots** from remote repositories.
+                    - 'clean install' cleans the build directory, compiles, runs tests (by default), and installs the artifact to the local repository.
+                    */
                 }
             }
-
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
