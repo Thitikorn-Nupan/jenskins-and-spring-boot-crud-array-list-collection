@@ -34,7 +34,7 @@ pipeline {
             stage('Build and Deploy Upstream SNAPSHOT') {
                 steps {
                     script {
-                        withMaven( mavenLocalRepo: '.repository' ) {
+                        withMaven( mavenLocalRepo: 'C:/Users/User/.m2' ) {
                             sh "mvn clean deploy" // Or your build command
                         }
                     }
