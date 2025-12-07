@@ -38,7 +38,7 @@ pipeline {
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                      sh "mvn deploy" // Builds the project, including resolving dependencies
+                      sh "mvn clean install -DskipTests" // Builds the project, including resolving dependencies
                      //  sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
                     // sh "mvn clean install -U"
                 }
@@ -123,7 +123,6 @@ pipeline {
                  }
                  success { // If some it is failure success won't work
                      echo 'Pipeline deploy spring boot + docker completed successfully.'
-                     sh 'pwd'
                  }
                  failure { // After failure on stages alert this still alert too (last process)
                      echo 'Pipeline deploy spring boot + docker failed.'
