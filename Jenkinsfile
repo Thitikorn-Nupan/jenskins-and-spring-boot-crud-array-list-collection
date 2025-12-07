@@ -31,6 +31,9 @@ pipeline {
                 }
             }
 
+            options {
+                pipelineTriggers([snapshotDependencies()])
+            }
 
             stage('Test maven') {
                 steps {
