@@ -13,6 +13,7 @@ pipeline {
             CONTAINER_PORT_IN = '8080'
     }
 
+
     // stages as working Flows tell Pipeline what gonna do
     stages {
             stage('Before initial check software installed') {
@@ -32,7 +33,11 @@ pipeline {
                 }
             }
 
-
+            triggers {
+                    // This line configures the trigger in the Jenkinsfile
+                    // Alternatively, configure it via the Jenkins UI in "Build Triggers"
+                    snapshotDependencies()
+            }
 
             stage('Test maven') {
                 steps {
