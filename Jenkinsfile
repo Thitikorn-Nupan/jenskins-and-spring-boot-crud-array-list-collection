@@ -38,7 +38,7 @@ pipeline {
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                      sh "mvn clean install -DskipTests" // Builds the project, including resolving dependencies
+                      sh "mvn clean test" // Builds the project, including resolving dependencies
                      //  sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
                     // sh "mvn clean install -U"
                 }
@@ -53,56 +53,56 @@ pipeline {
             }
 
 
-//             stage('Build maven') {
-//                 steps {
-//                     // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
-//                     sh 'pwd'
-//
-//                     // Go to target dir
-//                     dir('target') {
-//                         echo 'Before build jar'
-//                         sh "ls -l"
-//                     }
-//
-//                     // Builds the Spring Boot application using maven
-//                     sh "mvn clean install -DskipTests"
-//
-//                     // Returns to the original working directory
-//                     sh 'pwd'
-//                     // Go to target dir
-//                     dir('target') {
-//                         echo 'After build jar'
-//                         sh "ls -l"
-//                     }
-//                     // Returns to the original working directory
-//                     sh 'pwd'
-//                 }
-//             }
+            stage('Build maven') {
+                steps {
+                    // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
+                    sh 'pwd'
 
-//             stage('Build docker') {
-//                 steps {
-//                     sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
-//
-//                 }
-//                 post {
-//                      success {
-//                          echo 'After build successfully.'
-//                          sh 'docker images' // check is image create
-//                      }
-//                 }
-//             }
-//
-//             stage('Deploy') {
-//                 steps {
-//                     sh "docker run --name ${env.CONTAINER_RUNNER_NAME} -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
-//                 }
-//                 post {
-//                       success {
-//                           echo 'After run successfully.'
-//                           sh 'docker ps' // check is image running
-//                       }
-//                 }
-//             }
+                    // Go to target dir
+                    dir('target') {
+                        echo 'Before build jar'
+                        sh "ls -l"
+                    }
+
+                    // Builds the Spring Boot application using maven
+                    sh "mvn clean install -DskipTests"
+
+                    // Returns to the original working directory
+                    sh 'pwd'
+                    // Go to target dir
+                    dir('target') {
+                        echo 'After build jar'
+                        sh "ls -l"
+                    }
+                    // Returns to the original working directory
+                    sh 'pwd'
+                }
+            }
+
+            stage('Build docker') {
+                steps {
+                    sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
+
+                }
+                post {
+                     success {
+                         echo 'After build successfully.'
+                         sh 'docker images' // check is image create
+                     }
+                }
+            }
+
+            stage('Deploy') {
+                steps {
+                    sh "docker run --name ${env.CONTAINER_RUNNER_NAME} -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
+                }
+                post {
+                      success {
+                          echo 'After run successfully.'
+                          sh 'docker ps' // check is image running
+                      }
+                }
+            }
 
         }
         // The post section can be defined at both the global Pipeline level and within individual stage blocks, allowing for granular control over post-execution actions.
