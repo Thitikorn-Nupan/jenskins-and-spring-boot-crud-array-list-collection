@@ -35,10 +35,7 @@ pipeline {
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                    sh "mvn clean test"
-                                            withMaven(mavenSettingsConfig: 'basic-api-using-spring-boot-3') { // Optional: if you have custom Maven settings
-                                                sh 'mvn clean deploy' // Or 'mvn clean install' if not deploying to a remote repository
-                                            }
+                    sh "mvn clean install -X"
                 }
                 post {
                       success {
