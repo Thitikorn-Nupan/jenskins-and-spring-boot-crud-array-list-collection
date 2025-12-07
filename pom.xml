@@ -50,6 +50,8 @@
             <groupId>com.ttknp</groupId>
             <artifactId>valiadation-custom-service</artifactId>
             <version>0.0.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/valiadation-custom-service-0.0.1.jar</systemPath>
             <!--<scope>runtime</scope>-->
         </dependency>
     </dependencies>
