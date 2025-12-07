@@ -31,8 +31,14 @@ pipeline {
                 }
             }
 
-            options {
-                pipelineTriggers([snapshotDependencies()])
+            stage('Build and Deploy Upstream SNAPSHOT') {
+                steps {
+                    script {
+                        withMaven( mavenLocalRepo: '.repository' ) {
+                            sh "mvn clean deploy" // Or your build command
+                        }
+                    }
+                }
             }
 
             stage('Test maven') {
@@ -77,30 +83,30 @@ pipeline {
                 }
             }
 
-            stage('Build docker') {
-                steps {
-                    sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
-
-                }
-                post {
-                     success {
-                         echo 'After build successfully.'
-                         sh 'docker images' // check is image create
-                     }
-                }
-            }
-
-            stage('Deploy') {
-                steps {
-                    sh "docker run --name ${env.CONTAINER_RUNNER_NAME} -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
-                }
-                post {
-                      success {
-                          echo 'After run successfully.'
-                          sh 'docker ps' // check is image running
-                      }
-                }
-            }
+//             stage('Build docker') {
+//                 steps {
+//                     sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
+//
+//                 }
+//                 post {
+//                      success {
+//                          echo 'After build successfully.'
+//                          sh 'docker images' // check is image create
+//                      }
+//                 }
+//             }
+//
+//             stage('Deploy') {
+//                 steps {
+//                     sh "docker run --name ${env.CONTAINER_RUNNER_NAME} -p ${env.CONTAINER_PORT_OUT}:${env.CONTAINER_PORT_IN} -d ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
+//                 }
+//                 post {
+//                       success {
+//                           echo 'After run successfully.'
+//                           sh 'docker ps' // check is image running
+//                       }
+//                 }
+//             }
 
         }
         // The post section can be defined at both the global Pipeline level and within individual stage blocks, allowing for granular control over post-execution actions.
