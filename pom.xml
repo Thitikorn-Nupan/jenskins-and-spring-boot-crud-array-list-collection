@@ -45,6 +45,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.ttknp</groupId>
+            <artifactId>valiadation-custom-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+
+        </dependency>
     </dependencies>
 
     <build>
@@ -73,6 +79,31 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- **** importance for build jar with multiple modules -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.3</version>
+                <executions>
+                    <!-- in this module doesn't call but jdbc-custom-service use so it have to import -->
+                    <execution>
+                        <id>valiadation-custom-service</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.ttknp</groupId>
+                            <artifactId>valiadation-custom-service</artifactId>
+                            <version>0.0.1-SNAPSHOT</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/libs/valiadation-custom-service-0.0.1-SNAPSHOT.jar</file>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
