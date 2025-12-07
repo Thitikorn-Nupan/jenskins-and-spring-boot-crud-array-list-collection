@@ -1,0 +1,31 @@
+<settings>
+    <mirrors>
+        <mirror>
+            <id>nexus-public</id>
+            <url>https://github.com/Thitikorn-Nupan/jenskins-and-spring-boot-crud-array-list-collection/</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+    <servers>
+        <server>
+            <id>nexus-snapshots</id>
+            <username>ttknp</username>
+            <password>12345</password>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+</settings>

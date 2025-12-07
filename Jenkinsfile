@@ -37,7 +37,7 @@ pipeline {
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
-                    sh 'mvn -B -U clean install'
+                     sh 'mvn clean install -DskipTests' // Builds the project, including resolving dependencies
                     // sh "mvn clean install -U"
                 }
                 post {
@@ -51,31 +51,31 @@ pipeline {
             }
 
 
-            stage('Build maven') {
-                steps {
-                    // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
-                    sh 'pwd'
-
-                    // Go to target dir
-                    dir('target') {
-                        echo 'Before build jar'
-                        sh "ls -l"
-                    }
-
-                    // Builds the Spring Boot application using maven
-                    sh "mvn clean install -DskipTests"
-
-                    // Returns to the original working directory
-                    sh 'pwd'
-                    // Go to target dir
-                    dir('target') {
-                        echo 'After build jar'
-                        sh "ls -l"
-                    }
-                    // Returns to the original working directory
-                    sh 'pwd'
-                }
-            }
+//             stage('Build maven') {
+//                 steps {
+//                     // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
+//                     sh 'pwd'
+//
+//                     // Go to target dir
+//                     dir('target') {
+//                         echo 'Before build jar'
+//                         sh "ls -l"
+//                     }
+//
+//                     // Builds the Spring Boot application using maven
+//                     sh "mvn clean install -DskipTests"
+//
+//                     // Returns to the original working directory
+//                     sh 'pwd'
+//                     // Go to target dir
+//                     dir('target') {
+//                         echo 'After build jar'
+//                         sh "ls -l"
+//                     }
+//                     // Returns to the original working directory
+//                     sh 'pwd'
+//                 }
+//             }
 
 //             stage('Build docker') {
 //                 steps {
