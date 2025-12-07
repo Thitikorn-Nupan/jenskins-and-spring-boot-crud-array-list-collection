@@ -29,23 +29,29 @@ pipeline {
                 steps {
                     // Checks out the source code from your Git repository. *** Note, by default it will pull repo to C:\ProgramData\Jenkins\.jenkins\workspace\...
                     git branch: 'ttknp-spring-boot-3', url: 'https://github.com/Thitikorn-Nupan/jenskins-and-spring-boot-crud-array-list-collection.git'
-                    withMaven {
-                          sh "mvn clean verify"
+                }
+            }
+            stage('Build with Artifactory') {
+                        steps {
+                            rtMavenRun (
+                                tool: 'M3', // Maven tool name configured in Jenkins
+                                goals: 'clean install',
+                                resolverId: 'basic-api-using-spring-boot-3', // ID of your Artifactory server
+                                deployerId: 'basic-api-using-spring-boot-3'
+                            )
+                        }
                     }
-                }
-            }
 
-
-            stage('Build with Snapshots') {
-                steps {
-                    sh 'mvn -B -U clean install'
-                    /*
-                    - '-B' for non-interactive (batch) mode
-                    - '-U' **Forces a check for updated releases and snapshots** from remote repositories.
-                    - 'clean install' cleans the build directory, compiles, runs tests (by default), and installs the artifact to the local repository.
-                    */
-                }
-            }
+//             stage('Build with Snapshots') {
+//                 steps {
+//                     sh 'mvn -B -U clean install'
+//                     /*
+//                     - '-B' for non-interactive (batch) mode
+//                     - '-U' **Forces a check for updated releases and snapshots** from remote repositories.
+//                     - 'clean install' cleans the build directory, compiles, runs tests (by default), and installs the artifact to the local repository.
+//                     */
+//                 }
+//             }
 
             stage('Test maven') {
                 steps {
