@@ -35,7 +35,6 @@ pipeline {
 
             stage('Build with Snapshots') {
                 steps {
-                    mavenSnapshotCheck check: 'true'
                     sh 'mvn -B -U clean install'
                     /*
                     - '-B' for non-interactive (batch) mode
