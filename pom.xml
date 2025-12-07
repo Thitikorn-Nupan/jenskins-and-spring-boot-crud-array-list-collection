@@ -49,7 +49,7 @@
             <groupId>com.ttknp</groupId>
             <artifactId>valiadation-custom-service</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>runtime</scope>
+            <!--<scope>runtime</scope>-->
         </dependency>
     </dependencies>
 
