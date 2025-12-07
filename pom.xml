@@ -51,8 +51,14 @@
             <artifactId>valiadation-custom-service</artifactId>
             <version>0.0.1</version>
             <scope>system</scope>
+            <!--
+                importance when build jar on jenkins pipeline
+                by default it won't see your custom dependency
+                you have to set <systemPath><path to your jar></systemPath>
+                because it's auto install to Downloading from central: https://repo.maven.apache.org/maven2/com/ttknp/valiadation-custom-service/0.0.1/valiadation-custom-service-0.0.1.pom
+                you know your custom it's on server (localhost) not https://repo.maven.apache.org/maven2/com/ttknp/
+            -->
             <systemPath>${basedir}/libs/valiadation-custom-service-0.0.1.jar</systemPath>
-            <!--<scope>runtime</scope>-->
         </dependency>
     </dependencies>
 
@@ -101,9 +107,6 @@
                             <version>0.0.1-SNAPSHOT</version>
                             <packaging>jar</packaging>
                             <file>${basedir}/libs/valiadation-custom-service-0.0.1.jar</file>
-<!--
-                            <file>C:/ProgramData/Jenkins/.jenkins/workspace/basic-api-using-spring-boot-3-test/libs/libs/valiadation-custom-service-0.0.1-SNAPSHOT.jar</file>
--->
                         </configuration>
                     </execution>
 
