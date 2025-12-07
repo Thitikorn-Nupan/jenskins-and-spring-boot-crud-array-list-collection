@@ -24,12 +24,6 @@ pipeline {
                 }
             }
 
-            stage('Checkout git repo') {
-                steps {
-                    // Checks out the source code from your Git repository. *** Note, by default it will pull repo to C:\ProgramData\Jenkins\.jenkins\workspace\...
-                    git branch: 'ttknp-spring-boot-3', url: 'https://github.com/Thitikorn-Nupan/jenskins-and-spring-boot-crud-array-list-collection.git'
-                }
-            }
 
             stage('Build with Snapshots') {
                 steps {
@@ -41,6 +35,15 @@ pipeline {
                     */
                 }
             }
+
+
+            stage('Checkout git repo') {
+                steps {
+                    // Checks out the source code from your Git repository. *** Note, by default it will pull repo to C:\ProgramData\Jenkins\.jenkins\workspace\...
+                    git branch: 'ttknp-spring-boot-3', url: 'https://github.com/Thitikorn-Nupan/jenskins-and-spring-boot-crud-array-list-collection.git'
+                }
+            }
+
             stage('Test maven') {
                 steps {
                     // Compiles and runs the project's unit tests using the Surefire plugin (for unit tests) and Failsafe plugin (for integration tests).
