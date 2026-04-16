@@ -25,15 +25,12 @@ pipeline {
                 }
             }
 
-
             stage('Checkout git repo') {
                 steps {
                     // Checks out the source code from your Git repository. *** Note, by default it will pull repo to C:\ProgramData\Jenkins\.jenkins\workspace\...
                     git branch: 'ttknp-spring-boot-3', url: 'https://github.com/Thitikorn-Nupan/jenskins-and-spring-boot-crud-array-list-collection.git'
                 }
             }
-
-
 
             stage('Test maven') {
                 steps {
@@ -50,21 +47,17 @@ pipeline {
                 }
             }
 
-
             stage('Build maven') {
                 steps {
                     // Shows current working directory (e.g., /var/jenkins_home/workspace/my-pipeline)
                     sh 'pwd'
-
                     // Go to target dir
                     dir('target') {
                         echo 'Before build jar'
                         sh "ls -l"
                     }
-
                     // Builds the Spring Boot application using maven
                     sh "mvn clean install -DskipTests"
-
                     // Returns to the original working directory
                     sh 'pwd'
                     // Go to target dir
@@ -100,8 +93,8 @@ pipeline {
                       }
                 }
             }
-
         }
+
         // The post section can be defined at both the global Pipeline level and within individual stage blocks, allowing for granular control over post-execution actions.
         post {
                   /*
