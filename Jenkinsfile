@@ -9,8 +9,8 @@ pipeline {
             CONTAINER_NAME = 'basic-api'
             CONTAINER_RUNNER_NAME = 'backend'
             CONTAINER_VERSION = 'latest'
-            CONTAINER_PORT_OUT = '8080'
-            CONTAINER_PORT_IN = '8080'
+            CONTAINER_PORT_OUT = '8081'
+            CONTAINER_PORT_IN = '8081'
     }
 
 
@@ -80,7 +80,6 @@ pipeline {
             stage('Build docker') {
                 steps {
                     sh "docker build -t ${env.CONTAINER_NAME}:${env.CONTAINER_VERSION} --build-arg JAR_FILE=${env.JAR_TARGET} ."
-
                 }
                 post {
                      success {

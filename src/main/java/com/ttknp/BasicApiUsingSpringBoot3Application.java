@@ -4,7 +4,7 @@ import com.ttknp.valiadationcustomservice.validation.ValidateHelperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+// import org.springframework.context.annotation.ComponentScan;
 
 // @ComponentScan(basePackages = {"com.ttknp"}) // *** if you gonna test (with mockito) you have to comment this annotation
 @Slf4j

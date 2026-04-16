@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class PhoneService {
 
-    private List<Phone> phones;
+    private final List<Phone> phones;
 
     public PhoneService() {
         phones = List.of(
